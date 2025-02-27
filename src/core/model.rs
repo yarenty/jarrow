@@ -3,7 +3,7 @@ use crate::core::frame::Frame;
 use datafusion_expr::ColumnarValue;
 
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Model {
     pub params: ModelParams,
     pub train: Frame,
@@ -31,7 +31,7 @@ impl Default for Model {
 pub const MAX_SUPPORTED_LEVELS: i32 = 1 << 20;
 
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct ModelParams {
     pub algo: String, // name of algorithm
     pub family: String,
@@ -77,7 +77,8 @@ pub enum CategoricalEncodingScheme {
 }
 
 pub trait Scoring {
-    async fn score(&self, batch: Vec<RecordBatch>) -> ColumnarValue;
+    fn score(&self, batch: Vec<RecordBatch>) -> impl std::future::Future<Output = ColumnarValue> + Send;
+    // async fn score(&self, batch: Vec<RecordBatch>) -> ColumnarValue;
 }
 
 pub fn score_batch(

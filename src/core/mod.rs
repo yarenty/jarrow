@@ -1,6 +1,6 @@
-mod frame;
-mod metric;
+pub mod frame;
+pub mod metric;
 pub mod model;
-mod model_builder;
-mod score;
+pub mod model_builder;
+pub mod score;
 pub mod training;

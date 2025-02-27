@@ -1,6 +1,6 @@
 use datafusion::prelude::DataFrame;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Frame {
     data: Option<DataFrame>,
     statis: DataStatistics,
@@ -16,7 +16,7 @@ impl Default for Frame {
 }
 
 
-# [derive(Debug, Default)]
+# [derive(Debug, Default, Clone)]
 pub struct DataStatistics {
     // pub distribution: Distribution,
     pub min: Option<f64>,

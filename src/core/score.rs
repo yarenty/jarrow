@@ -1,6 +1,6 @@
 use arrow::array::RecordBatch;
 use datafusion::logical_expr::ColumnarValue;
-use crate::core::model::Model;
+use crate::core::model::{Model, ModelParams};
 
 
 #[derive(Default, Debug)]
@@ -21,7 +21,7 @@ pub struct ScoreInfo {
 }
 
 
-#[derive(Default, Debug)]
+#[derive(Default, Debug, Clone)]
 pub struct ScoreKeeper {
     pub mean_residual_deviance: Option<f64>,
     pub mse: Option<f64>,
@@ -79,8 +79,8 @@ pub struct ScoreKeeper {
 // }
 
 impl ScoreKeeper {
-    pub fn from_model(_model: &Model) -> ScoreKeeper {
-        todo!()
-    }
+  pub fn from_model(_model_params: &ModelParams) -> ScoreKeeper {
+              ScoreKeeper::default()
+  }
 }
 
